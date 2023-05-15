@@ -4,6 +4,7 @@
 consulta:-
     write("Bem vindo(a)! Qual peça de computador você gostaria de saber mais sobre? Digite o número:"), nl,
     write("1. Processador"),nl,
+    write("2. Placa Mãe"), nl,
     read(Opcao),nl,
     escolha(Opcao).
 
