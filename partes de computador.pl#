@@ -16,7 +16,8 @@ escolha(1):-
     write("Nome: "), write(Nome), nl,
     write("Velocidade: "), write(Velocidade), nl,
     write("Soquete: "), write(Soquete), nl,
-    write("Preço: "), write(Preco), nl.
+    write("Preço: "), write(Preco), nl,nl,
+    consulta.
 
 escolha(2):-
     listing(placas_mae/8),
@@ -68,10 +69,3 @@ placas_mae("ASRock H470 Steel Legend", 16, "ATX", "DDR4", 4, "Não", 4, "R$759").
 placas_mae("ASUS TUF Gaming B560M-PLUS", 17, "Micro ATX", "DDR4", 4, "Sim", 4, "R$789").
 placas_mae("Gigabyte B550M DS3H AC", 18, "Micro ATX", "DDR4", 4, "Sim", 4, "R$659").
 placas_mae("MSI B450 TOMAHAWK MAX", 19, "ATX", "DDR4", 4, "Não", 4, "R$839").
-
-
-
-
-
-
-
