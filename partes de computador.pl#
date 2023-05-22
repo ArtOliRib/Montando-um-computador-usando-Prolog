@@ -13,37 +13,144 @@ consulta:-
     read(Opcao),nl,
     escolha(Opcao).
 
-filtrar_placas(Saida, ResolucaoS, FonteS, MemoriaS, PrecoM) :-
-    placa_de_video(Nome, Id, Saida, Resolucao, Fonte, Memoria, Preco),
-    ResolucaoS = Resolucao,
-    FonteS = Fonte,
-    MemoriaS = Memoria,
-    Preco =< PrecoM,
-    writeln("Nome: " + Nome + ", Id: " + Id + ", Saida: " + Saida + ", Resolução: " + Resolucao + ", Fonte: " + Fonte + ", Memoria: " + Memoria + ", Preco: " + Preco),
+
+%Filtra e mostra os dados das peças correspondentes.
+
+filtrar_placa_video(FonteM, MemoriaM, PrecoM) :-
+    placa_de_video(Nome,_, Saida, Resolucao, Fonte, Memoria, Preco),
+    Fonte =< FonteM,
+    Memoria =< MemoriaM,
+    Preco =< PrecoM,nl,
+    write("--------------------------------------------"),nl,
+    write("Nome: "), write(Nome),nl,
+    write("Saida: "), write(Saida),nl,
+    write("Resolução: "), write(Resolucao),nl,
+    write("Fonte: "), write(Fonte),write("W"),nl,
+    write("Memoria:"), write(Memoria),write("GB"),nl,
+    write("Preco: R$"),write(Preco),nl,
+    write("--------------------------------------------"),nl,
     fail.
 
-filtrar_processadores(SoqueteS, VelocidadeMI, VelocidadeMA, PrecoM) :-
+filtrar_processadores(VelocidadeMI, VelocidadeMA, PrecoM) :-
     processador(Nome, _ , VelocidadeMin, VelocidadeMax, Soquete, Preco),
-    Soquete = SoqueteS,
     VelocidadeMin >= VelocidadeMI,
     VelocidadeMax =< VelocidadeMA,
     Preco =< PrecoM,
-    nl,nl,nl,
+    nl,
+    write("--------------------------------------------"),nl,
     write("Nome: "), write(Nome),nl,
     write("Velocidade minima: "), write(VelocidadeMin),nl,
     write("Velocidade Maxima:  "), write(VelocidadeMax),nl,
     write("Soquete: "), write(Soquete),nl,
-    write("Preco: "),write(Preco),nl,nl,
-    write("Escreva ""consulta."" novamente para voltar para o menu"),nl,nl,nl,nl,
+    write("Preco: R$"),write(Preco),nl,
+    write("--------------------------------------------"),nl,
     fail.
 
-escolha(1):-
-    write("Digite o as caracteristicas do processador que voce deseja comprar (se não souber ou não quiser acrescentar algum filtro escreva ""_."" no local: "),nl,nl,
+filtrar_RAM(DdrF,FrequenciaM, VelocidadeM, PrecoM) :-
+    memoria_ram(Nome, _ , Ddr , Frequencia, Velocidade, Preco),
+    Ddr = DdrF,
+    Frequencia >= FrequenciaM,
+    Velocidade =< VelocidadeM,
+    Preco =< PrecoM,
+    nl,
+    write("--------------------------------------------"),nl,
+    write("Nome: "), write(Nome), nl,
+    write("DDR: "), write(Ddr), nl,
+    write("Frequencia: ") , write(Frequencia),write("MHz"), nl,
+    write("Velocidade: "), write(Velocidade),write("GB"), nl,
+    write("Preço: "),write("R$ "), write(Preco),nl,
+    write("--------------------------------------------"),nl,
+    fail.
+
+
+filtrar_placa_mae(VelocidadeMI, VelocidadeMA, PrecoM) :-
+    processador(Nome, _ , VelocidadeMin, VelocidadeMax, Soquete, Preco),
+    VelocidadeMin >= VelocidadeMI,
+    VelocidadeMax =< VelocidadeMA,
+    Preco =< PrecoM,
+    nl,
+    write("--------------------------------------------"),nl,
+    write("Nome: "), write(Nome),nl,
+    write("Velocidade minima: "), write(VelocidadeMin),nl,
+    write("Velocidade Maxima:  "), write(VelocidadeMax),nl,
+    write("Soquete: "), write(Soquete),nl,
+    write("Preco: R$"),write(Preco),nl,
+    write("--------------------------------------------"),nl,
+    fail.
+
+
+
+
+
+
+%recebe os valores para a filtragem dos processadores.
+
+
+
+filtroP(1):-
+    write("Digite as velocidades para pesquisa:"),nl,nl,
     write("Velocidade Minima: "), read(VelocidadeMI), nl,
     write("Velocidade Maxima: "), read(VelocidadeMA),nl,
-    write("Soquete: "), read(SoqueteS), nl,
+    filtrar_processadores(VelocidadeMI,VelocidadeMA,100000000).
+
+filtroP(2):-
+    write("Escreva o preço maximo para a busca"),nl,nl,
     write("PreçoMaximo: "), read(PrecoM), nl,nl,
-    filtrar_processadores(SoqueteS, VelocidadeMI, VelocidadeMA, PrecoM).
+    filtrar_processadores(0 , 10 , PrecoM).
+% ------------------------------------------------------------------------
+
+
+% recebe os valores para a filtragem das placas de video.
+
+
+filtroPV(1):-
+    write("Digite a voltagem maxima da placa de video que deseja pesquisar:"),nl,nl,
+    read(VoltagemM), nl,nl,
+    filtrar_placa_video(VoltagemM , 10000 ,100000).
+
+filtroPV(2):-
+    write("Digite a quantidade de memoria VRAM maxima que deseja obter:"),nl,nl,
+    read(MemoriaM), nl,nl,
+    filtrar_placa_video(100000 , MemoriaM , 1000000).
+
+filtroPV(3):-
+    write("Digite o preço maximo para a busca:"),nl,nl,
+    write("PreçoMaximo: "), read(PrecoM), nl,nl,
+    filtrar_placa_video(10000 , 1000 , PrecoM).
+
+%---------------------------------------------------------
+
+%filtros da memoria RAM.
+
+filtroMR(1):-
+    write("Digite o numero do DDR da memoria RAM que deseja buscar:"),
+    read(Ddr), nl,nl,
+    filtrar_RAM(Ddr, 1000 ,100000000, 1000000).
+
+filtroMR(2):-
+    write("Digite a frequencia maxima da memoria RAM que deseja buscar:"),nl,nl,
+    read(FrequenciaM), nl,nl,
+    filtrar_RAM(_ , FrequenciaM, 1000 , 1000000).
+
+filtroMR(3):-
+    write("Digite a velocidade maxima da memoria RAM que deseja buscar:"),nl,nl,
+    read(VelocidadeM), nl,nl,
+    filtrar_RAM(_, 10000 , VelocidadeM , 1000000).
+
+filtroMR(4):-
+    write("Digite o preço maximo para a busca:"),nl,nl,
+    read(PrecoM), nl,nl,
+    filtrar_RAM(_, 10000 , 1000 , PrecoM).
+
+%----------------------------------------------------.
+
+escolha(1):-
+    write("Escolha a opção de filtragem"),nl,nl,
+    write("1.Velocidade"),nl,
+    write("2.Preço"),nl,
+    read(Num),nl,nl,
+    filtroP(Num).
+
 
 escolha(2):-
     listing(placas_mae/8),
@@ -60,30 +167,22 @@ escolha(2):-
     consulta.
 
 escolha(3):-
-    listing(memoria_ram/6),
-    write("Digite o ID da placa mãe que voce quer consultar da lista: "),
-    read(Id),nl,nl,
-    memoria_ram(Nome,Id,Ddr,Frequencia,Velocidade,Preço),
-    write("Nome: "), write(Nome), nl,
-    write("DDR: "), write(Ddr), nl,
-    write("Frequencia: ") , write(Frequencia), nl,
-    write("Velocidade: "), write(Velocidade), nl,
-    write("Preço: "),write("R$ "), write(Preço), nl,nl,
-    consulta.
+    write("Escolha a opção de filtragem"),nl,nl,
+    write("1.Ddr"),nl,
+    write("2.Frequencia"),nl,
+    write("3.Velocidade"),nl,
+    write("4.preço"),nl,
+    read(Num),nl,nl,
+    filtroMR(Num).
+
 
 escolha(4):-
-    listing(placa_de_video/7),
-    write("Digite o ID da placa mãe que voce quer consultar da lista: "),
-    read(Id),nl,nl,
-    placa_de_video(Nome,Id,Saida,Resolução,Fonte,Memoria, Preco),
-    write("Nome: "), write(Nome), nl,
-    write("Tipo de saida de video: "), write(Saida), nl,
-    write("Resolução: "), write(Resolução), nl,
-    write("Consumo de energia: ") , write(Fonte), nl,
-    write("Memoria de video : "),write(Memoria), nl,
-    write("Preço: "),write("R$ "), write(Preco), nl,nl,
-    consulta.
-
+    write("Escolha a opção de filtragem"),nl,nl,
+    write("1.Voltagem"),nl,
+    write("2.Memoria"),nl,
+    write("3.Preço"),nl,
+    read(Num),nl,nl,
+    filtroPV(Num).
 
 
 
@@ -132,36 +231,36 @@ processador("AMD Ryzen 5 5600G", 33, 3.9, 4.4, "AM4", 1665).
 %placa-mae(nome,id,tamanho,soquete,DDR,m.2,slots da memoria ram,preço).
 
 
-placas_mae("ASUS TUF Gaming - X570-Plus", 1, "ATX", "DDR4", 4, "Sim", 4, 1948).
-placas_mae("Gigabyte B450 AORUS ELITE", 2, "ATX", "DDR4", 4, "Não", 4, 839).
-placas_mae("MSI MAG B550 TOMAHAWK", 3, "ATX", "DDR4", 4, "Sim", 4, 1099).
-placas_mae("ASRock B550M Steel Legend", 4, "Micro ATX", "DDR4", 4, "Sim", 4, 809).
-placas_mae("ASUS ROG Strix Z490-E Gaming", 5, "ATX", "DDR4", 4, "Sim", 4, 2479).
-placas_mae("Gigabyte Z390 AORUS PRO", 6, "ATX", "DDR4", 4, "Sim", 4, 1289).
-placas_mae("MSI MPG Z590 GAMING EDGE WIFI", 7, "ATX", "DDR4", 4, "Sim", 4, 1699).
-placas_mae("ASRock B450M-HDV R4.0", 8, "Micro ATX", "DDR4", 2, "Não", 2, 399).
-placas_mae("ASUS Prime X570-P", 9, "ATX", "DDR4", 4, "Sim", 4, 1129).
-placas_mae("Gigabyte B560M DS3H", 10, "Micro ATX", "DDR4", 4, "Sim", 4, 539).
-placas_mae("MSI MPG Z490 GAMING PLUS", 11, "ATX", "DDR4", 4, "Sim", 4, 1149).
-placas_mae("ASRock B450 PRO4", 12, "ATX", "DDR4", 4, "Não", 4, 609).
-placas_mae("ASUS ROG Strix B550-F Gaming", 13, "ATX", "DDR4", 4, "Sim", 4, 1399).
-placas_mae("Gigabyte Z390 GAMING X", 14, "ATX", "DDR4", 4, "Sim", 4, 1019).
-placas_mae("MSI MAG B550M MORTAR", 15, "Micro ATX", "DDR4", 4, "Sim", 4, 949).
-placas_mae("ASRock H470 Steel Legend", 16, "ATX", "DDR4", 4, "Não", 4, 759).
-placas_mae("ASUS TUF Gaming B560M-PLUS", 17, "Micro ATX", "DDR4", 4, "Sim", 4, 789).
-placas_mae("Gigabyte B550M DS3H AC", 18, "Micro ATX", "DDR4", 4, "Sim", 4, 659).
-placas_mae("MSI B450 TOMAHAWK MAX", 19, "ATX", "DDR4", 4, "Não", 4, 839).
-placas_mae("ASRock B450M-HDV R4.0", 20, "Micro ATX", "DDR4", 2, "Não", 2, 399).
-placas_mae("ASUS Prime X570-P", 21, "ATX", "DDR4", 4, "Sim", 4, 1129).
-placas_mae("Gigabyte B560M DS3H", 22, "Micro ATX", "DDR4", 4, "Sim", 4, 539).
-placas_mae("MSI MPG Z490 GAMING PLUS", 23, "ATX", "DDR4", 4, "Sim", 4, 1149).
-placas_mae("ASRock B450 PRO4", 24, "ATX", "DDR4", 4, "Não", 4, 609).
-placas_mae("ASUS ROG Strix B550-F Gaming", 25, "ATX", "DDR4", 4, "Sim", 4, 1399).
-placas_mae("Gigabyte Z390 GAMING X", 26, "ATX", "DDR4", 4, "Sim", 4, 1019).
-placas_mae("MSI MAG B550M MORTAR", 27, "Micro ATX", "DDR4", 4, "Sim", 4, 949).
-placas_mae("ASRock H470 Steel Legend", 28, "ATX", "DDR4", 4, "Não", 4, 759).
-placas_mae("ASUS TUF Gaming B560M-PLUS", 29, "Micro ATX", "DDR4", 4, "Sim", 4, 789).
-placas_mae("Gigabyte B550M DS3H AC", 30, "Micro ATX", "DDR4", 4, "Sim", 4, 659).
+placas_mae("ASUS TUF Gaming - X570-Plus", 1, "ATX", 4, 4, "Sim", 4, 1948).
+placas_mae("Gigabyte B450 AORUS ELITE", 2, "ATX", 4, 4, "Não", 4, 839).
+placas_mae("MSI MAG B550 TOMAHAWK", 3, "ATX", 4, 4, "Sim", 4, 1099).
+placas_mae("ASRock B550M Steel Legend", 4, "Micro ATX", 4, 4, "Sim", 4, 809).
+placas_mae("ASUS ROG Strix Z490-E Gaming", 5, "ATX", 4, 4, "Sim", 4, 2479).
+placas_mae("Gigabyte Z390 AORUS PRO", 6, "ATX", 4, 4, "Sim", 4, 1289).
+placas_mae("MSI MPG Z590 GAMING EDGE WIFI", 7, "ATX", 4, 4, "Sim", 4, 1699).
+placas_mae("ASRock B450M-HDV R4.0", 8, "Micro ATX", 4, 2, "Não", 2, 399).
+placas_mae("ASUS Prime X570-P", 9, "ATX", 4, 4, "Sim", 4, 1129).
+placas_mae("Gigabyte B560M DS3H", 10, "Micro ATX", 4, 4, "Sim", 4, 539).
+placas_mae("MSI MPG Z490 GAMING PLUS", 11, "ATX", 4, 4, "Sim", 4, 1149).
+placas_mae("ASRock B450 PRO4", 12, "ATX", 4, 4, "Não", 4, 609).
+placas_mae("ASUS ROG Strix B550-F Gaming", 13, "ATX", 4, 4, "Sim", 4, 1399).
+placas_mae("Gigabyte Z390 GAMING X", 14, "ATX", 4, 4, "Sim", 4, 1019).
+placas_mae("MSI MAG B550M MORTAR", 15, "Micro ATX", 4, 4, "Sim", 4, 949).
+placas_mae("ASRock H470 Steel Legend", 16, "ATX", 4, 4, "Não", 4, 759).
+placas_mae("ASUS TUF Gaming B560M-PLUS", 17, "Micro ATX", 4, 4, "Sim", 4, 789).
+placas_mae("Gigabyte B550M DS3H AC", 18, "Micro ATX", 4, 4, "Sim", 4, 659).
+placas_mae("MSI B450 TOMAHAWK MAX", 19, "ATX", 4, 4, "Não", 4, 839).
+placas_mae("ASRock B450M-HDV R4.0", 20, "Micro ATX", 4, 2, "Não", 2, 399).
+placas_mae("ASUS Prime X570-P", 21, "ATX", 4, 4, "Sim", 4, 1129).
+placas_mae("Gigabyte B560M DS3H", 22, "Micro ATX", 4, 4, "Sim", 4, 539).
+placas_mae("MSI MPG Z490 GAMING PLUS", 23, "ATX", 4, 4, "Sim", 4, 1149).
+placas_mae("ASRock B450 PRO4", 24, "ATX", 4, 4, "Não", 4, 609).
+placas_mae("ASUS ROG Strix B550-F Gaming", 25, "ATX", 4, 4, "Sim", 4, 1399).
+placas_mae("Gigabyte Z390 GAMING X", 26, "ATX", 4, 4, "Sim", 4, 1019).
+placas_mae("MSI MAG B550M MORTAR", 27, "Micro ATX", 4, 4, "Sim", 4, 949).
+placas_mae("ASRock H470 Steel Legend", 28, "ATX", 4, 4, "Não", 4, 759).
+placas_mae("ASUS TUF Gaming B560M-PLUS", 29, "Micro ATX", 4, 4, "Sim", 4, 789).
+placas_mae("Gigabyte B550M DS3H AC", 30, "Micro ATX", 4, 4, "Sim", 4, 659).
 
 
 
@@ -172,16 +271,16 @@ placas_mae("Gigabyte B550M DS3H AC", 30, "Micro ATX", "DDR4", 4, "Sim", 4, 659).
 
 
 
-memoria_ram("Corsair Vengeance LPX", 1, 4, "3200MHz", "8GB", 100).
-memoria_ram("G.Skill Ripjaws V", 2, 4, "3600MHz", "16GB", 150).
-memoria_ram("Crucial Ballistix", 3, 4, "3000MHz", "8GB", 90).
-memoria_ram("Kingston HyperX Fury", 4, 4, "2400MHz", "16GB", 120).
-memoria_ram("ADATA XPG Spectrix D41", 5, 4, "3200MHz", "32GB", 250).
-memoria_ram("Samsung DDR3", 6, 3, "1600MHz", "8GB", 80).
-memoria_ram("HyperX Fury Black", 7, 3, "1866MHz", "16GB", 110).
-memoria_ram("Crucial DDR3L", 8, "3L", "1600MHz", "8GB", 70).
-memoria_ram("G.Skill Trident Z", 9, 4, "4000MHz", "32GB", 350).
-memoria_ram("Corsair Dominator Platinum", 10, 4, "3200MHz", "64GB", 600).
+memoria_ram("Corsair Vengeance LPX", 1, 4, 3200, 8, 100).
+memoria_ram("G.Skill Ripjaws V", 2, 4, 3600, 16, 150).
+memoria_ram("Crucial Ballistix", 3, 4, 3000, 8, 90).
+memoria_ram("Kingston HyperX Fury", 4, 4, 2400, 16, 120).
+memoria_ram("ADATA XPG Spectrix D41", 5, 4, 3200, 32, 250).
+memoria_ram("Samsung DDR3", 6, 3, 1600, 8, 80).
+memoria_ram("HyperX Fury Black", 7, 3, 1866, 16, 110).
+memoria_ram("Crucial DDR3L", 8, "3L", 1600, 8, 70).
+memoria_ram("G.Skill Trident Z", 9, 4, 4000, 32, 350).
+memoria_ram("Corsair Dominator Platinum", 10, 4, 3200, 64, 600).
 
 
 %Banco 4
@@ -190,16 +289,36 @@ memoria_ram("Corsair Dominator Platinum", 10, 4, "3200MHz", "64GB", 600).
 
 
 
-placa_de_video("NVIDIA GeForce RTX 3080", 1,"HDMI", "4K", "750W", "10GB GDDR6X", 4999).
-placa_de_video("AMD Radeon RX 6900 XT", 2, "HDMI", "4K", "850W", "16GB GDDR6", 5999).
-placa_de_video("NVIDIA GeForce RTX 3070", 3, "HDMI", "4K", "650W", "8GB GDDR6", 3499).
-placa_de_video("AMD Radeon RX 6800 XT", 4, "HDMI", "4K", "750W", "16GB GDDR6", 4299).
-placa_de_video("NVIDIA GeForce GTX 1660 Ti", 5,"HDMI", "1440p", "450W", "6GB GDDR6", 1799).
-placa_de_video("AMD Radeon RX 6700 XT", 6, "HDMI", "1440p", "650W", "12GB GDDR6", 2499).
-placa_de_video("NVIDIA GeForce RTX 3060 Ti", 7,"HDMI", "4K", "600W", "8GB GDDR6", 3199).
-placa_de_video("AMD Radeon RX 5700 XT", 8, "HDMI", "1440p", "600W", "8GB GDDR6", 2299).
-placa_de_video("NVIDIA GeForce GTX 1650 Super", 9,"HDMI", "1080p", "350W", "4GB GDDR6", 899).
-placa_de_video("AMD Radeon RX 5600 XT", 10,"HDMI", "1080p", "450W", "6GB GDDR6", 1599).
+placa_de_video("NVIDIA GeForce RTX 3080", 1,"HDMI", "4K", 750, 10, 4999).
+placa_de_video("AMD Radeon RX 6900 XT", 2, "HDMI", "4K", 850, 16, 5999).
+placa_de_video("NVIDIA GeForce RTX 3070", 3, "HDMI", "4K", 650, 8, 3499).
+placa_de_video("AMD Radeon RX 6800 XT", 4, "HDMI", "4K", 750, 16, 4299).
+placa_de_video("NVIDIA GeForce GTX 1660 Ti", 5,"HDMI", "1440p", 450, 6, 1799).
+placa_de_video("AMD Radeon RX 6700 XT", 6, "HDMI", "1440p", 650, 12, 2499).
+placa_de_video("NVIDIA GeForce RTX 3060 Ti", 7,"HDMI", "4K", 600, 8, 3199).
+placa_de_video("AMD Radeon RX 5700 XT", 8, "HDMI", "1440p", 600, 8, 2299).
+placa_de_video("NVIDIA GeForce GTX 1650 Super", 9,"HDMI", "1080p", 350, 4, 899).
+placa_de_video("AMD Radeon RX 5600 XT", 10,"HDMI", "1080p", 450, 6, 1599).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
