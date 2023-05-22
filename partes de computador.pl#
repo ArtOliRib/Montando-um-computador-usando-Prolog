@@ -9,7 +9,6 @@ consulta:-
     write("4. Placa de video"), nl,
     write("5. Armazenamento"),nl,
     write("6. fonte de alimentação"),nl,
-    write("7. Mostrar valores"),nl,
     read(Opcao),nl,
     escolha(Opcao).
 
@@ -63,17 +62,19 @@ filtrar_RAM(DdrF,FrequenciaM, VelocidadeM, PrecoM) :-
     fail.
 
 
-filtrar_placa_mae(VelocidadeMI, VelocidadeMA, PrecoM) :-
-    processador(Nome, _ , VelocidadeMin, VelocidadeMax, Soquete, Preco),
-    VelocidadeMin >= VelocidadeMI,
-    VelocidadeMax =< VelocidadeMA,
+filtrar_placa_mae(EntradaM, TamanhoM , Ddr, PrecoM) :-
+    placas_mae(Nome,_,Tamanho,Soquete,DDR,Entrada,_,Preco),
+    Entrada = EntradaM,
+    Tamanho = TamanhoM,
+    Ddr = DDR,
     Preco =< PrecoM,
     nl,
     write("--------------------------------------------"),nl,
     write("Nome: "), write(Nome),nl,
-    write("Velocidade minima: "), write(VelocidadeMin),nl,
-    write("Velocidade Maxima:  "), write(VelocidadeMax),nl,
-    write("Soquete: "), write(Soquete),nl,
+    write("Tamanho da placa mãe: "), write(Tamanho),nl,
+    write("Soquete:  "), write(Soquete),nl,
+    write("DDR"),write(DDR),nl,
+    write("Tem entrada M.2?: "), write(Entrada),nl,
     write("Preco: R$"),write(Preco),nl,
     write("--------------------------------------------"),nl,
     fail.
@@ -144,6 +145,29 @@ filtroMR(4):-
 
 %----------------------------------------------------.
 
+%Filtros da placa mae.
+
+filtroPM(1):-
+    write("Buscar placas que tem entrada M.2? Escreva Sim ou Não entre aspas"),nl,nl,
+    read(Entrada), nl,nl,
+    filtrar_placa_mae(Entrada, _ ,_ , 100000).
+
+filtroPM(2):-
+    write("Digite o tamanho, ""ATX"" ou ""Micro ATX"", da placa mãe que deseja buscar."),nl,nl,
+    read(Tamanho), nl,nl,
+    filtrar_placa_mae(_ , Tamanho ,_ ,100000).
+
+filtroPM(3):-
+    write("Digite o preço maximo para a busca:"),nl,write("Lista de DDRs: 3, 4 e 5"),nl,nl,
+    read(DDR), nl,nl,
+    filtrar_placa_mae( _,_ , DDR , 100000).
+
+filtroPM(4):-
+    write("Digite o preço maximo para a busca:"),nl,nl,
+    read(PrecoM), nl,nl,
+    filtrar_placa_mae( _ , _, _ , PrecoM).
+
+%-----------------------------------------------.
 escolha(1):-
     write("Escolha a opção de filtragem"),nl,nl,
     write("1.Velocidade"),nl,
@@ -153,18 +177,14 @@ escolha(1):-
 
 
 escolha(2):-
-    listing(placas_mae/8),
-    write("Digite o ID da placa mãe que voce quer consultar da lista: "),
-    read(ID),nl,nl,
-    placas_mae(Nome,ID,Tamanho,Soquete,Ddr,M_2,Slots,Preco),
-    write("Nome: "), write(Nome), nl,
-    write("Velocidade: "), write(Tamanho), nl,
-    write("Soquete: "), write(Soquete), nl,
-    write("DDR: ") , write(Ddr), nl,
-    write("Aceita SSD NMVE? : "),write(M_2), nl,
-    write("Slots de Memoria RAM: "),write(Slots), nl,
-    write("Preço: "),write("R$ "), write(Preco), nl,nl,
-    consulta.
+    write("Escolha a opção de filtragem"),nl,nl,
+    write("1.Entrada m.2"),nl,
+    write("2.Tamanho"),nl,
+    write("3.DDR"),nl,
+    write("4.Preço"),nl,
+    read(Num),nl,nl,
+    filtroPM(Num).
+
 
 escolha(3):-
     write("Escolha a opção de filtragem"),nl,nl,
