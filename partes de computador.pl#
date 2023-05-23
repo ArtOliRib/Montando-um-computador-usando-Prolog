@@ -79,8 +79,32 @@ filtrar_placa_mae(EntradaM, TamanhoM , Ddr, PrecoM) :-
     write("--------------------------------------------"),nl,
     fail.
 
+filtrar_armazenamento(TipoM , CapacidadeM, PrecoM) :-
+    armazenamento(Nome,_,Tipo,Capacidade,Preco),
+    Tipo = TipoM,
+    Capacidade =< CapacidadeM,
+    Preco =< PrecoM,
+    nl,
+    write("--------------------------------------------"),nl,
+    write("Nome: "), write(Nome),nl,
+    write("Tipo de armazenamento: "),write(Tipo),nl,
+    write("Quantidade de armazenamento: "), write(Capacidade), write("GB"),nl,
+    write("Preco: R$"),write(Preco),nl,
+    write("--------------------------------------------"),nl,
+    fail.
 
-
+filtrar_fonte(VoltagemM , Modular, PrecoM) :-
+    fontes(Nome, _ , Voltagem,Modular,Preco),
+    Voltagem =< VoltagemM,
+    Preco =< PrecoM,
+    nl,
+    write("--------------------------------------------"),nl,
+    write("Nome: "), write(Nome),nl,
+    write("voltagem: "),write(Voltagem),write("W"),nl,
+    write("A fonte é modular?: "), write(Modular),nl,
+    write("Preco: R$"),write(Preco),nl,
+    write("--------------------------------------------"),nl,
+    fail.
 
 
 
@@ -168,6 +192,46 @@ filtroPM(4):-
     filtrar_placa_mae( _ , _, _ , PrecoM).
 
 %-----------------------------------------------.
+
+%Filtros de armazenamento.
+
+filtroA(1):-
+    write("Escolha o tipo de armazenamento, escreva ""HDD"" ou ""SSD"" com as aspas, que deseja buscar:"),nl,nl,
+    read(Tipo), nl,nl,
+    filtrar_armazenamento( Tipo , 99999999, 100000).
+
+filtroA(2):-
+    write("Digite a quantidade de armazenamento maximo que voce deseja buscar:"),nl,nl,
+    read(Capacidade), nl,nl,
+    filtrar_armazenamento( _ , Capacidade, 100000).
+
+filtroA(3):-
+    write("Digite o preço maximo para a busca:"),nl,nl,
+    read(PrecoM), nl,nl,
+    filtrar_armazenamento( _ , 99999999 , PrecoM).
+
+%-----------------------------------------------------.
+
+%Filtro de fontes.
+
+
+filtroF(1):-
+    write("Digite a voltagem maxima que deseja buscar:"),nl,nl,
+    read(Voltagem), nl,nl,
+    filtrar_fonte( Voltagem , _ , 9999999).
+
+filtroF(2):-
+    write("Pesquisar placas modulares? Digite ""Sim"" ou ""Não"""),nl,nl,
+    read(Modular), nl,nl,
+    filtrar_fonte( 9999999 , Modular, 999999).
+
+filtroF(3):-
+    write("Digite o preço maximo para a busca:"),nl,nl,
+    read(PrecoM), nl,nl,
+    filtrar_fonte( 9999999 , _ , PrecoM).
+
+%-----------------------------------------------
+
 escolha(1):-
     write("Escolha a opção de filtragem"),nl,nl,
     write("1.Velocidade"),nl,
@@ -203,6 +267,24 @@ escolha(4):-
     write("3.Preço"),nl,
     read(Num),nl,nl,
     filtroPV(Num).
+
+escolha(5):-
+    write("Escolha a opção de filtragem"),nl,nl,
+    write("1.Tipo de armazenamento"),nl,
+    write("2.Tamanho de armazenamento"),nl,
+    write("3.Preço"),nl,
+    read(Num),nl,nl,
+    filtroA(Num).
+
+escolha(6):-
+    write("Escolha a opção de filtragem"),nl,nl,
+    write("1.Voltagem"),nl,
+    write("2.Modularização"),nl,
+    write("3.Preço"),nl,
+    read(Num),nl,nl,
+    filtroF(Num).
+
+
 
 
 
@@ -321,14 +403,115 @@ placa_de_video("NVIDIA GeForce GTX 1650 Super", 9,"HDMI", "1080p", 350, 4, 899).
 placa_de_video("AMD Radeon RX 5600 XT", 10,"HDMI", "1080p", 450, 6, 1599).
 
 
+%banco 5
+
+%armazenamento(Nome,id,tipo,capacidade,preço).
+
+armazenamento("Seagate Barracuda", 1, "HDD", 1000, 100).
+armazenamento("Western Digital Blue", 2, "HDD", 2000, 150).
+armazenamento("Toshiba P300", 3, "HDD", 500, 80).
+armazenamento("Seagate IronWolf", 4, "HDD", 4000, 200).
+armazenamento("Western Digital Black", 5, "HDD", 3000, 180).
+armazenamento("Toshiba X300", 6, "HDD", 1000, 90).
+armazenamento("Seagate FireCuda", 7, "HDD", 2000, 120).
+armazenamento("Samsung SSD 860 EVO", 8, "SSD", 500, 150).
+armazenamento("Crucial MX500", 9, "SSD", 1000, 200).
+armazenamento("Kingston A2000", 10, "SSD", 250, 80).
+armazenamento("Seagate BarraCuda Pro", 11, "HDD", 4000, 200).
+armazenamento("Western Digital Red", 12, "HDD", 2000, 150).
+armazenamento("Toshiba X300", 13, "HDD", 6000, 250).
+armazenamento("Seagate IronWolf Pro", 14, "HDD", 8000, 300).
+armazenamento("Western Digital Black", 15, "HDD", 4000, 180).
+armazenamento("Toshiba N300", 16, "HDD", 8000, 280).
+armazenamento("Seagate Exos X10", 17, "HDD", 10000, 750).
+armazenamento("HGST Ultrastar", 18, "HDD", 4000, 400).
+armazenamento("Samsung Spinpoint F4", 19, "HDD", 2000, 120).
+armazenamento("Hitachi Deskstar", 20, "HDD", 3000, 150).
+armazenamento("Seagate SkyHawk", 21, "HDD", 8000, 250).
+armazenamento("Western Digital Purple", 22, "HDD", 4000, 180).
+armazenamento("Toshiba S300", 23, "HDD", 6000, 220).
+armazenamento("Seagate Surveillance", 24, "HDD", 8000, 280).
+armazenamento("WD Gold Enterprise", 25, "HDD", 10000, 350).
+armazenamento("Samsung 980 PRO", 26, "SSD", 500, 150).
+armazenamento("Crucial MX500", 27, "SSD", 1000, 200).
+armazenamento("Kingston A2000", 28, "SSD", 250, 80).
+armazenamento("WD Blue SN550", 29, "SSD", 500, 120).
+armazenamento("Samsung 870 EVO", 30, "SSD", 1000, 180).
+armazenamento("Seagate FireCuda 520", 31, "SSD", 500, 200).
+armazenamento("Corsair MP600", 32, "SSD", 1000, 250).
+armazenamento("Crucial P5", 33, "SSD", 500, 180).
+armazenamento("Samsung 970 EVO Plus", 34, "SSD", 500, 170).
+armazenamento("WD Black SN750", 35, "SSD", 1000, 220).
+armazenamento("ADATA XPG SX8200 Pro", 36, "SSD", 1000, 190).
+armazenamento("Samsung 960 EVO", 37, "SSD", 500, 150).
+armazenamento("Crucial P2", 38, "SSD", 500, 100).
+armazenamento("Kingston KC2000", 39, "SSD", 500, 160).
+armazenamento("WD Blue SN570", 40, "SSD", 500, 130).
+armazenamento("Samsung 870 QVO", 41, "SSD", 2000, 220).
+armazenamento("Seagate Barracuda 510", 42, "SSD", 500, 190).
+armazenamento("Corsair MP400", 43, "SSD", 1000, 240).
+armazenamento("Crucial BX500", 44, "SSD", 480, 60).
+armazenamento("WD Blue 3D NAND", 45, "SSD", 1000, 150).
+armazenamento("Samsung 860 EVO", 46, "SSD", 500, 130).
+armazenamento("ADATA XPG GAMMIX S5", 47, "SSD", 1000, 180).
+armazenamento("Kingston KC2500", 48, "SSD", 500, 200).
+armazenamento("Crucial MX100", 49, "SSD", 512, 100).
+armazenamento("Samsung 850 EVO", 50, "SSD", 500, 120).
 
 
+% fontes(Nome, id, voltagem,Modular,preco).
 
 
-
-
-
-
+fontes("EVGA SuperNOVA 750 G+", 1, 750, "Sim", 150).
+fontes("Corsair RM750x", 2, 750, "Sim", 160).
+fontes("Seasonic Focus GX-650", 3, 650, "Sim", 120).
+fontes("Cooler Master MWE Gold 750", 4, 750, "Não", 130).
+fontes("Thermaltake Toughpower GF1 650", 5, 650, "Sim", 110).
+fontes("EVGA 600 W1", 6, 600, "Não", 50).
+fontes("Corsair CX550M", 7, 550, "Sim", 85).
+fontes("be quiet! Pure Power 11 600", 8, 600, "Não", 90).
+fontes("SilverStone Technology Strider Gold S", 9, 650, "Não", 100).
+fontes("Antec NeoECO Gold ZEN 600", 10, 600, "Não", 80).
+fontes("EVGA SuperNOVA 850 P2", 11, 850, "Sim", 200).
+fontes("Corsair HX850i", 12, 850, "Sim", 220).
+fontes("Seasonic Prime PX-750", 13, 750, "Sim", 180).
+fontes("Cooler Master MWE Gold 650 V2", 14, 650, "Não", 100).
+fontes("Thermaltake Toughpower GF1 750", 15, 750, "Sim", 130).
+fontes("EVGA 700 GD", 16, 700, "Não", 75).
+fontes("Corsair CX650M", 17, 650, "Sim", 95).
+fontes("be quiet! Pure Power 11 700", 18, 700, "Não", 110).
+fontes("SilverStone Technology Strider Titanium", 19, 800, "Não", 220).
+fontes("Antec Earthwatts Gold Pro 650", 20, 650, "Não", 85).
+fontes("EVGA SuperNOVA 1000 G5", 21, 1000, "Sim", 250).
+fontes("Corsair AX1000", 22, 1000, "Sim", 280).
+fontes("Seasonic Focus GX-850", 23, 850, "Sim", 200).
+fontes("Cooler Master MWE Gold 750 V2", 24, 750, "Não", 130).
+fontes("Thermaltake Toughpower GF1 850", 25, 850, "Sim", 150).
+fontes("EVGA SuperNOVA 850 G+", 26, 850, "Sim", 180).
+fontes("Corsair RM850x", 27, 850, "Sim", 200).
+fontes("Seasonic Focus GX-750", 28, 750, "Sim", 150).
+fontes("Cooler Master MWE Gold 850", 29, 850, "Não", 160).
+fontes("Thermaltake Toughpower GF1 750", 30, 750, "Sim", 140).
+fontes("EVGA 650 GQ", 31, 650, "Sim", 110).
+fontes("Corsair CX750M", 32, 750, "Sim", 130).
+fontes("be quiet! Straight Power 11 650", 33, 650, "Não", 120).
+fontes("SilverStone Technology Strider Gold S", 34, 750, "Sim", 160).
+fontes("Antec NeoECO Gold ZEN 700", 35, 700, "Não", 100).
+fontes("EVGA SuperNOVA 850 G5", 36, 850, "Sim", 220).
+fontes("Corsair HX1000i", 37, 1000, "Sim", 300).
+fontes("Seasonic Prime PX-850", 38, 850, "Sim", 230).
+fontes("Cooler Master MWE Gold 850 V2", 39, 850, "Não", 170).
+fontes("Thermaltake Toughpower GF1 850", 40, 850, "Sim", 180).
+fontes("EVGA 750 GQ", 41, 750, "Sim", 130).
+fontes("Corsair CX850M", 42, 850, "Sim", 150).
+fontes("be quiet! Straight Power 11 700", 43, 700, "Não", 140).
+fontes("SilverStone Technology Strider Titanium", 44, 850, "Não", 250).
+fontes("Antec Earthwatts Gold Pro 750", 45, 750, "Não", 120).
+fontes("EVGA SuperNOVA 1200 P2", 46, 1200, "Sim", 350).
+fontes("Corsair AX1200i", 47, 1200, "Sim", 380).
+fontes("Seasonic Focus GX-1000", 48, 1000, "Sim", 280).
+fontes("Cooler Master MWE Gold 1000 V2", 49, 1000, "Não", 200).
+fontes("Thermaltake Toughpower GF1 1000", 50, 1000, "Sim", 230).
 
 
 
