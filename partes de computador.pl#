@@ -122,6 +122,7 @@ filtroP(2):-
     write("Escreva o preço maximo para a busca"),nl,nl,
     write("PreçoMaximo: "), read(PrecoM), nl,nl,
     filtrar_processadores(0 , 10 , PrecoM).
+
 % ------------------------------------------------------------------------
 
 
@@ -146,6 +147,9 @@ filtroPV(3):-
 %---------------------------------------------------------
 
 %filtros da memoria RAM.
+
+
+
 
 filtroMR(1):-
     write("Digite o numero do DDR da memoria RAM que deseja buscar:"),
@@ -327,6 +331,24 @@ processador("Intel Core i7-11700F", 30, 2.5, 4.9, "FCLGA1200", 1600).
 processador("Intel Core i5-12400F", 31, 2.4, 4.4, "FCLGA1700", 1500).
 processador("AMD Ryzen 9 3900x", 32, 3.8, 4.6, "AM4", 2130).
 processador("AMD Ryzen 5 5600G", 33, 3.9, 4.4, "AM4", 1665).
+processador("Intel core i5-12400F", 34, 2.4, 4.4, "FCLGA1700", 1200).
+processador("AMD Ryzen 9 3900x", 35, 3.8, 4.6, "AM4", 2130).
+processador("AMD Ryzen 5 5600G", 36, 3.9, 4.4, "AM4", 1665).
+processador("Intel Core i3-13100F", 37, 3.4, 4.5, "FCLGA1700", 970).
+processador("AMD Ryzen 5 5600", 38, 3.5, 4.4, "AM4", 1033).
+processador("AMD Ryzen 9 5950X", 39, 3.4, 4.9, "AM4", 4105).
+processador("Intel Core i9-11900K", 40, 3.5, 5.3, "FCLGA1200", 4393).
+processador("AMD Ryzen 7 5800X", 41, 3.8, 4.7, "AM4", 1999).
+processador("Intel Core i7-11700K", 42, 3.96, 5.0, "FCLGA1200", 2607).
+processador("Intel Core i5-11600K", 43, 3.9, 4.9, "FCLGA1200", 1868).
+processador("AMD Ryzen 7 5700X", 44, 3.4, 4.6, "AM4", 1399).
+processador("Intel Core i5-10400F", 45, 2.9, 4.3, "FCLGA1200", 750).
+processador("AMD Ryzen 5 4600G", 46, 3.7, 4.2, "AM4", 700).
+processador("Intel Core i5-11400F", 47, 2.6, 4.4, "FCLGA1200", 1000).
+processador("AMD Ryzen 7 3800X", 48, 3.9, 4.5, "AM4", 2300).
+processador("Intel Core i7-9700K", 49, 3.6, 4.9, "FCLGA1151", 5000).
+processador("AMD Ryzen 9 3900X", 50, 3.8, 4.6, "AM4", 2000).
+
 
 %Banco 2: Placa Mãe.
 
@@ -363,6 +385,26 @@ placas_mae("MSI MAG B550M MORTAR", 27, "Micro ATX", 4, 4, "Sim", 4, 949).
 placas_mae("ASRock H470 Steel Legend", 28, "ATX", 4, 4, "Não", 4, 759).
 placas_mae("ASUS TUF Gaming B560M-PLUS", 29, "Micro ATX", 4, 4, "Sim", 4, 789).
 placas_mae("Gigabyte B550M DS3H AC", 30, "Micro ATX", 4, 4, "Sim", 4, 659).
+placas_mae("ASUS TUF Gaming - X570-Plus", 31, "ATX", 4, 4, "Sim", 4, 1948).
+placas_mae("Gigabyte B450 AORUS ELITE", 32, "ATX", 4, 4, "Não", 4, 839).
+placas_mae("MSI MAG B550 TOMAHAWK", 33, "ATX", 4, 4, "Sim", 4, 1099).
+placas_mae("ASRock B550M Steel Legend", 34, "Micro ATX", 4, 4, "Sim", 4, 809).
+placas_mae("ASUS ROG Strix Z490-E Gaming", 35, "ATX", 4, 4, "Sim", 4, 2479).
+placas_mae("Gigabyte Z390 AORUS PRO", 36, "ATX", 4, 4, "Sim", 4, 1289).
+placas_mae("MSI MPG Z590 GAMING EDGE WIFI", 37, "ATX", 4, 4, "Sim", 4, 1699).
+placas_mae("ASRock B450M-HDV R4.0", 38, "Micro ATX", 4, 2, "Não", 2, 399).
+placas_mae("ASUS Prime X570-P", 39, "ATX", 4, 4, "Sim", 4, 1129).
+placas_mae("Gigabyte B560M DS3H", 40, "Micro ATX", 4, 4, "Sim", 4, 539).
+placas_mae("MSI MPG Z490 GAMING PLUS", 41, "ATX", 4, 4, "Sim", 4, 1149).
+placas_mae("ASRock B450 PRO4", 42, "ATX", 4, 4, "Não", 4, 609).
+placas_mae("ASUS ROG Strix B550-F Gaming", 43, "ATX", 4, 4, "Sim", 4, 1399).
+placas_mae("Gigabyte Z390 GAMING X", 44, "ATX", 4, 4, "Sim", 4, 1019).
+placas_mae("MSI MAG B550M MORTAR", 45, "Micro ATX", 4, 4, "Sim", 4, 949).
+placas_mae("ASRock H470 Steel Legend", 46, "ATX", 4, 4, "Não", 4, 759).
+placas_mae("ASUS TUF Gaming B560M-PLUS", 47, "Micro ATX", 4, 4, "Sim", 4, 789).
+placas_mae("Gigabyte B550M DS3H AC", 48, "Micro ATX", 4, 4, "Sim", 4, 659).
+placas_mae("MSI B450 TOMAHAWK MAX", 49, "ATX", 4, 4, "Não", 4, 839).
+placas_mae("ASRock B450M-HDV R4.0", 50, "Micro ATX", 4, 2, "Não", 2, 399).
 
 
 
@@ -380,9 +422,49 @@ memoria_ram("Kingston HyperX Fury", 4, 4, 2400, 16, 120).
 memoria_ram("ADATA XPG Spectrix D41", 5, 4, 3200, 32, 250).
 memoria_ram("Samsung DDR3", 6, 3, 1600, 8, 80).
 memoria_ram("HyperX Fury Black", 7, 3, 1866, 16, 110).
-memoria_ram("Crucial DDR3L", 8, "3L", 1600, 8, 70).
+memoria_ram("Crucial DDR3L", 8, 3, 1600, 8, 70).
 memoria_ram("G.Skill Trident Z", 9, 4, 4000, 32, 350).
 memoria_ram("Corsair Dominator Platinum", 10, 4, 3200, 64, 600).
+memoria_ram("Corsair Vengeance LPX", 11, 4, 3200, 8, 100).
+memoria_ram("G.Skill Ripjaws V", 12, 4, 3600, 16, 150).
+memoria_ram("Crucial Ballistix", 13, 4, 3000, 8, 90).
+memoria_ram("Kingston HyperX Fury", 14, 4, 2400, 16, 120).
+memoria_ram("ADATA XPG Spectrix D41", 15, 4, 3200, 32, 250).
+memoria_ram("Samsung DDR3", 16, 3, 1600, 8, 80).
+memoria_ram("HyperX Fury Black", 17, 3, 1866, 16, 110).
+memoria_ram("Crucial DDR3L", 18, "3L", 1600, 8, 70).
+memoria_ram("G.Skill Trident Z", 19, 4, 4000, 32, 350).
+memoria_ram("Corsair Dominator Platinum", 20, 4, 3200, 64, 600).
+memoria_ram("Corsair Vengeance RGB Pro", 21, 4, 3200, 16, 160).
+memoria_ram("G.Skill Trident Z Royal", 22, 4, 3200, 16, 200).
+memoria_ram("Crucial Ballistix RGB", 23, 4, 3200, 16, 180).
+memoria_ram("Kingston HyperX Predator", 24, 4, 3200, 32, 300).
+memoria_ram("ADATA XPG SPECTRIX D60G", 25, 4, 3200, 16, 170).
+memoria_ram("Samsung DDR4", 26, 4, 2666, 8, 90).
+memoria_ram("HyperX Fury RGB", 27, 4, 3200, 16, 150).
+memoria_ram("Crucial DDR4", 28, 4, 2400, 8, 70).
+memoria_ram("G.Skill Trident Z Neo", 29, 4, 3600, 32, 400).
+memoria_ram("Corsair Dominator Platinum RGB", 30, 4, 3200, 32, 500).
+memoria_ram("Corsair Vengeance LPX", 31, 4, 3200, 8, 100).
+memoria_ram("G.Skill Ripjaws V", 32, 4, 3600, 16, 150).
+memoria_ram("Crucial Ballistix", 33, 4, 3000, 8, 90).
+memoria_ram("Kingston HyperX Fury", 34, 4, 2400, 16, 120).
+memoria_ram("ADATA XPG Spectrix D41", 35, 4, 3200, 32, 250).
+memoria_ram("Samsung DDR3", 36, 3, 1600, 8, 80).
+memoria_ram("HyperX Fury Black", 37, 3, 1866, 16, 110).
+memoria_ram("Crucial DDR3L", 38, 3, 1600, 8, 70).
+memoria_ram("G.Skill Trident Z", 39, 4, 4000, 32, 350).
+memoria_ram("Corsair Dominator Platinum", 40, 4, 3200, 64, 600).
+memoria_ram("Corsair Vengeance RGB Pro", 41, 4, 3200, 16, 160).
+memoria_ram("G.Skill Trident Z Royal", 42, 4, 3200, 16, 200).
+memoria_ram("Crucial Ballistix RGB", 43, 4, 3200, 16, 180).
+memoria_ram("Kingston HyperX Predator", 44, 4, 3200, 32, 300).
+memoria_ram("ADATA XPG SPECTRIX D60G", 45, 4, 3200, 16, 170).
+memoria_ram("Samsung DDR4", 46, 4, 2666, 8, 90).
+memoria_ram("HyperX Fury RGB", 47, 4, 3200, 16, 150).
+memoria_ram("Crucial DDR4", 48, 4, 2400, 8, 70).
+memoria_ram("G.Skill Trident Z Neo", 49, 4, 3600, 32, 400).
+memoria_ram("Corsair Dominator Platinum RGB", 50, 4, 3200, 32, 500).
 
 
 %Banco 4
@@ -401,6 +483,46 @@ placa_de_video("NVIDIA GeForce RTX 3060 Ti", 7,"HDMI", "4K", 600, 8, 3199).
 placa_de_video("AMD Radeon RX 5700 XT", 8, "HDMI", "1440p", 600, 8, 2299).
 placa_de_video("NVIDIA GeForce GTX 1650 Super", 9,"HDMI", "1080p", 350, 4, 899).
 placa_de_video("AMD Radeon RX 5600 XT", 10,"HDMI", "1080p", 450, 6, 1599).
+placa_de_video("NVIDIA GeForce RTX 3080", 11, "HDMI", "4K", 750, 10, 4999).
+placa_de_video("AMD Radeon RX 6900 XT", 12, "HDMI", "4K", 850, 16, 5999).
+placa_de_video("NVIDIA GeForce RTX 3070", 13, "HDMI", "4K", 650, 8, 3499).
+placa_de_video("AMD Radeon RX 6800 XT", 14, "HDMI", "4K", 750, 16, 4299).
+placa_de_video("NVIDIA GeForce GTX 1660 Ti", 15, "HDMI", "1440p", 450, 6, 1799).
+placa_de_video("AMD Radeon RX 6700 XT", 16, "HDMI", "1440p", 650, 12, 2499).
+placa_de_video("NVIDIA GeForce RTX 3060 Ti", 17, "HDMI", "4K", 600, 8, 3199).
+placa_de_video("AMD Radeon RX 5700 XT", 18, "HDMI", "1440p", 600, 8, 2299).
+placa_de_video("NVIDIA GeForce GTX 1650 Super", 19, "HDMI", "1080p", 350, 4, 899).
+placa_de_video("AMD Radeon RX 5600 XT", 20, "HDMI", "1080p", 450, 6, 1599).
+placa_de_video("NVIDIA GeForce RTX 3090", 21, "HDMI", "8K", 1400, 24, 1499).
+placa_de_video("AMD Radeon RX 6800", 22, "HDMI", "4K", 650, 16, 6499).
+placa_de_video("NVIDIA GeForce RTX 3060", 23, "HDMI", "4K", 400, 12, 999).
+placa_de_video("AMD Radeon RX 5500 XT", 24, "HDMI", "1080p", 200, 4, 249).
+placa_de_video("NVIDIA GeForce GTX 1050 Ti", 25, "HDMI", "1080p", 300, 4, 179).
+placa_de_video("AMD Radeon RX 570", 26, "HDMI", "1080p", 120, 4, 149).
+placa_de_video("NVIDIA GeForce GT 1030", 27, "HDMI", "1080p", 30, 2, 89).
+placa_de_video("AMD Radeon RX Vega 64", 28, "HDMI", "4K", 400, 8, 799).
+placa_de_video("NVIDIA GeForce GTX 1080 Ti", 29, "HDMI", "4K", 350, 11, 699).
+placa_de_video("AMD Radeon RX 480", 30, "HDMI", "1440p", 150, 8, 299).
+placa_de_video("NVIDIA GeForce GTX 970", 31, "HDMI", "4K", 300, 4, 199).
+placa_de_video("AMD Radeon R9 390", 32, "HDMI", "4K", 275, 8, 299).
+placa_de_video("NVIDIA GeForce GTX 1060", 33, "HDMI", "1080p", 200, 6, 249).
+placa_de_video("AMD Radeon RX 460", 34, "HDMI", "1080p", 75, 4, 99).
+placa_de_video("NVIDIA GeForce GT 710", 35, "HDMI", "1080p", 20, 2, 49).
+placa_de_video("AMD Radeon RX 550", 36, "HDMI", "1080p", 75, 2, 89).
+placa_de_video("NVIDIA GeForce MX350", 37, "HDMI", "4K", 25, 2, 119).
+placa_de_video("AMD Radeon R7 240", 38, "HDMI", "1080p", 30, 2, 69).
+placa_de_video("NVIDIA GeForce GTX 980 Ti", 39, "HDMI", "4K", 250, 6, 499).
+placa_de_video("AMD Radeon R9 290X", 40, "HDMI", "4K", 250, 4, 299).
+placa_de_video("NVIDIA GeForce GTX 1050", 41, "HDMI", "1080p", 75, 2, 139).
+placa_de_video("AMD Radeon RX 560", 42, "HDMI", "1080p", 75, 4, 109).
+placa_de_video("NVIDIA GeForce GT 1030 DDR4", 43, "HDMI", "1080p", 30, 2, 79).
+placa_de_video("AMD Radeon RX 5500", 44, "HDMI", "1080p", 150, 4, 199).
+placa_de_video("NVIDIA GeForce GTX 1660", 45, "HDMI", "1080p", 120, 6, 219).
+placa_de_video("AMD Radeon RX 5300", 46, "HDMI", "1080p", 100, 3, 139).
+placa_de_video("NVIDIA GeForce GTX 960", 47, "HDMI", "4K", 120, 4, 199).
+placa_de_video("AMD Radeon R7 260X", 48, "HDMI", "1080p", 115, 2, 149).
+placa_de_video("NVIDIA GeForce GT 730", 49, "HDMI", "1080p", 50, 2, 79).
+placa_de_video("AMD Radeon R5 240", 50, "HDMI", "1080p", 30, 1, 49).
 
 
 %banco 5
