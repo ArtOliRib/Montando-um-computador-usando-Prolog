@@ -186,7 +186,7 @@ filtroPM(2):-
     filtrar_placa_mae(_ , Tamanho ,_ ,100000).
 
 filtroPM(3):-
-    write("Digite o preço maximo para a busca:"),nl,write("Lista de DDRs: 3, 4 e 5"),nl,nl,
+    write("Digite o DDR que a placa mãe suporta."),nl,write("Lista de DDRs: 3, 4 e 5"),nl,nl,
     read(DDR), nl,nl,
     filtrar_placa_mae( _,_ , DDR , 100000).
 
